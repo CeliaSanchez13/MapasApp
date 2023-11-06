@@ -1,0 +1,5 @@
+<app-loading *ngIf="!isUserLocationReady; else mapReady"></app-loading>
+
+<ng-template #mapReady> <!-- Si el mapa no esta listo, sale el app-loafing y este template esta oculto-->
+    <app-map-view></app-map-view>
+</ng-template>
