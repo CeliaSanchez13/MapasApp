@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PlacesService } from '../../services';
+import { MapService, PlacesService } from '../../services';
 import {Map, Marker, Popup} from 'mapbox-gl';
 
 @Component({
@@ -12,7 +12,8 @@ export class MapViewComponent implements AfterViewInit{
    //Busca algo con la refencia local que le indicamos
   @ViewChild('mapDiv') mapDivElement!: ElementRef
 
-  constructor( private placesService: PlacesService ){}
+  constructor( private placesService: PlacesService,
+               private mapService: MapService ){}
 
   ngAfterViewInit(): void {
     if ( !this.placesService.userLocation) throw Error('No hay placesService.userLog');
@@ -34,6 +35,9 @@ export class MapViewComponent implements AfterViewInit{
         .setLngLat( this.placesService.userLocation )
         .setPopup( popup )
         .addTo( map )
+
+
+      this.mapService.setMap( map ); //Insertamos el mapa
   }
 
  
